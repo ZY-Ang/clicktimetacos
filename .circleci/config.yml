@@ -1,0 +1,48 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+    # specify the version you desire here
+    - image: node:8.1.0
+
+    working_directory: ~/repo
+
+    steps:
+    # Update NPM to v2
+    - run:
+        name: Update npm to v2
+        command: npm install npm@2 -g
+    # Update NPM to v3
+    - run:
+        name: Update npm to v3
+        command: npm install npm@latest -g
+
+    # Checkout Repo
+    - checkout
+
+    # Download and cache dependencies
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "package.json" }}
+        # fallback to using the latest cache if no exact match is found
+        - v1-dependencies-
+
+    # Install Packages
+    - run: npm install
+
+    - save_cache:
+        paths:
+        - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+
+    - run:
+        name: Build optimized React App
+        command: npm run build
+
+    - run:
+        name: Publish to firebase
+        command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
