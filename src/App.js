@@ -50,8 +50,17 @@ class App extends Component {
                     }
                     this.setState(() => ({tacos}));
                 });
+                // Load the toppings
                 getAllToppings()
                     .then(toppings => this.setState(() => ({toppings})));
+
+                if (window.FS) {
+                    window.FS.identify(signedInUser.uid, {
+                        displayName: signedInUser.displayName,
+                        email: signedInUser.email,
+                        photoURL: signedInUser.photoURL
+                    });
+                }
             }
         })
     }

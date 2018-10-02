@@ -180,7 +180,6 @@ class ModalBuildTaco extends React.Component {
                             </div>
                             <div className="modal-body">
                                 <form className="form" onSubmit={this.buildTaco}>
-                                    <p className="description text-center">Or Be Classical</p>
                                     {
                                         toppings &&
                                         <div className="card-body">
