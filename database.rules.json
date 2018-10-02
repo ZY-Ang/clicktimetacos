@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "$uid": {
+      // User should only be read and write to his or her own tacos table.
+      ".read": "$uid === auth.uid",
+      ".write": "$uid === auth.uid"
+    }
+  }
+}
