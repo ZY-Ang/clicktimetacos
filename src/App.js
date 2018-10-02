@@ -103,6 +103,7 @@ class App extends Component {
                                         <h4 className="card-title">
                                             <span role="img" aria-label="welcome">🌮</span> Welcome, {this.state.signedInUser.email}
                                         </h4>
+                                        <p className="category"><a href="https://zy-ang.com" rel="noopener noreferrer" target="_blank">View my Online Resume</a></p>
                                     </div>
                                 </div>
                                 {
